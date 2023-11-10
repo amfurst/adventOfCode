@@ -1,9 +1,17 @@
 package com.amfurst.adventOfCode.year2022.day1
 
 fun main() {
-    val inputLines = object {}.javaClass.getResourceAsStream("/2022/day1/input.txt")?.bufferedReader()?.readLines()
+    val inputLines = readInput("/2022/day1/input.txt")
+    val result = processInput(inputLines)
+    println(result)
+}
 
-    val elves = inputLines?.fold(mutableListOf(Elf())) { elves, item ->
+fun readInput(fileName: String): List<String>? {
+    return object {}.javaClass.getResourceAsStream(fileName)?.bufferedReader()?.readLines()
+}
+
+fun processInput(input: List<String>?): Int? {
+    val elves = input?.fold(mutableListOf(Elf())) { elves, item ->
         if (item.isEmpty()) {
             elves.add(Elf())
         } else {
@@ -13,7 +21,8 @@ fun main() {
     }
 
     elves?.sortByDescending { it.getTotal() }
-    println(elves?.take(3)?.fold(0) {total, elf -> total + elf.getTotal()})
+
+    return elves?.take(3)?.fold(0) {total, elf -> total + elf.getTotal()}
 }
 
 class Elf {
