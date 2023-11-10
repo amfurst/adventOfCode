@@ -12,7 +12,8 @@ fun main() {
         elves
     }
 
-    println(elves?.maxOfOrNull { it.getTotal() })
+    elves?.sortByDescending { it.getTotal() }
+    println(elves?.take(3)?.fold(0) {total, elf -> total + elf.getTotal()})
 }
 
 class Elf {
