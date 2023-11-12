@@ -23,7 +23,7 @@ open class File(val name: String, open val size: Int) {
 
 class Directory(name: String, private var _parent: Directory? = null) : File(name, 0) {
     override val isDir: Boolean = true
-    val contents: MutableMap<String, File> = mutableMapOf()
+    private val contents: MutableMap<String, File> = mutableMapOf()
 
     override val size: Int
         get() = contents.values.sumOf { it.size }
